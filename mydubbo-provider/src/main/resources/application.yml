@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8001
+
+
+server:
+  port: 8081
+
+
+
+
+

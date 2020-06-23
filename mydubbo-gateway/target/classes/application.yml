@@ -1,0 +1,29 @@
+
+
+server:
+  port: 8000
+
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8001
+
+    gateway:
+      routes:
+      - id: consumer
+        uri: lb://consumer
+        predicates:
+          - Path=/consumer/**
+          # 去掉/qa/ 比如访问url是/qa/test 经过gateway后，后面服务拿到的就只有/test
+        filters:
+          - StripPrefix=1
+      - id: provider
+        uri: lb://provider
+        predicates:
+          - Path=/provider/**
+        filters:
+          - StripPrefix=1
+  application:
+    name: gateway
+
